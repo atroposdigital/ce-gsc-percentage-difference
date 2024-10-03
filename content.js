@@ -151,7 +151,8 @@ function getUrlParams() {
   return {
     compareDate: params.get('compare_date'),
     numOfMonths: params.get('num_of_months'),
-    numOfDays: params.get('num_of_days')  // Handle num_of_days parameter
+    numOfDays: params.get('num_of_days'),
+    resourceID: params.get('resource_id')
   };
 }
 
@@ -172,7 +173,8 @@ function shouldRecalculate() {
   if (
     currentParams.compareDate !== previousParams.compareDate ||
     currentParams.numOfMonths !== previousParams.numOfMonths ||
-    currentParams.numOfDays !== previousParams.numOfDays
+    currentParams.numOfDays !== previousParams.numOfDays ||
+    currentParams.resourceID !== previousParams.resourceID
   ) {
     previousParams = currentParams; // Update stored parameters
     return true; // Recalculate if any of these parameters have changed
@@ -195,7 +197,7 @@ function detectUrlChange() {
       // Wait for 3-4 seconds before recalculating to ensure data is populated
       setTimeout(() => {
         retryLoadData();  // Recalculate after delay
-      }, 3500);  // 3.5 seconds delay
+      }, 4000);  // 3.5 seconds delay
     }
   }
 }
